@@ -1,0 +1,31 @@
+.jumbotron {
+  padding-top: 6rem;
+  background-color: #e2edff;
+}
+
+#project {
+  padding: 2rem;
+  background-color: #e2edff;
+}
+
+#about {
+  padding-top: 3rem;
+}
+
+#project {
+  padding-top: 3rem;
+}
+
+#contact {
+  padding-top: 3rem;
+  background-color: #e2edff;
+}
+
+#sertifikat {
+  padding-top: 3rem;
+}
+
+u {
+  text-decoration: underline;
+  text-decoration-color: blue;
+}
