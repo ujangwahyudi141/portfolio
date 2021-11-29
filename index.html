@@ -73,7 +73,7 @@
         <div class="row justify-content-center fs-5" style="text-align: justify">
           <div class="col-md-6">
             <p>
-              Merupakan lulusan <u>informatika</u> dari STMIK Horizon Karawang dengan <u>3.00</u>, aktif di <u>Badan Eksekutif Mahasiswa</u> dan <u>komunitas Linux Horizon</u> semasa kuliah. Telah menyelesaikan matakuliah penting, seperti :
+              Merupakan lulusan <u>informatika</u> dari STMIK Horizon Karawang dengan IPK <u>3.00</u>, aktif di <u>Badan Eksekutif Mahasiswa</u> dan <u>komunitas Linux Horizon</u> semasa kuliah. Telah menyelesaikan matakuliah penting, seperti :
               algoritma dan pemrograman dasar, struktur data, object oriented programming, system development life cicle, pemrograman web dasar, pemrograman web lanjut, pemrograman mobile, cloud computing, data mining, sistem pakar dan
               sistem penunjang keputusan.
             </p>
@@ -290,20 +290,28 @@
         </div>
         <div class="row justify-content-center">
           <div class="col-md-8">
-            <form>
+            <form name="submit-to-google-sheet">
+              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Terimakasih!</strong> Pesan Anda Berhasil Terkirim.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
               <div class="mb-3">
                 <label for="name" class="form-label">Name</label>
-                <input type="name" class="form-control" id="name" aria-describedby="name" />
+                <input type="name" class="form-control" id="name" name="nama" aria-describedby="name" />
               </div>
               <div class="mb-3">
                 <label for="email" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="email" aria-describedby="emailHelp" />
+                <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" />
               </div>
               <div class="mb-3">
                 <label for="pesan">Message</label>
-                <textarea class="form-control" placeholder="Leave a message here" id="pesan" style="height: 100px"></textarea>
+                <textarea class="form-control" placeholder="Leave a message here" id="pesan" name="pesan" style="height: 100px"></textarea>
               </div>
-              <button type="submit" class="btn btn-primary">Send</button>
+              <button type="submit" class="btn btn-primary btn-kirim">Send</button>
+              <button class="btn btn-primary btn-loading d-none" type="button" disabled>
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                Loading...
+              </button>
             </form>
           </div>
         </div>
@@ -325,5 +333,28 @@
     <!-- akhir footer -->
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous"></script>
+    <script>
+      const scriptURL = 'https://script.google.com/macros/s/AKfycbygld_U4ls_tdOZd5BG1Lkwify2lMnjrgZfiCOsyi8aXmNtA810PMk3lSys7jaA2vCE/exec'
+      const form = document.forms['submit-to-google-sheet']
+      const btnKirim = document.querySelector('.btn-kirim');
+      const btnLoading = document.querySelector('.btn-loading');
+      const myAlert = document.querySelector('.alert');
+
+
+      form.addEventListener('submit', e => {
+        e.preventDefault();
+        btnKirim.classList.toggle('d-none');
+        btnLoading.classList.toggle('d-none');
+        fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+          .then(response => {
+            btnKirim.classList.toggle('d-none');
+            btnLoading.classList.toggle('d-none');
+            myAlert.classList.toggle('d-none');
+            form.reset();
+            console.log('Success!', response)
+        })
+          .catch(error => console.error('Error!', error.message))
+      })
+    </script>
   </body>
 </html>
