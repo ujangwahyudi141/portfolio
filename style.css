@@ -29,3 +29,8 @@ u {
   text-decoration: underline;
   text-decoration-color: blue;
 }
+
+.icon {
+  margin-left: 150px;
+  width: 20px;
+}
