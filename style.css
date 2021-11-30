@@ -39,3 +39,14 @@ u {
   margin-left: 120px;
   width: 70px;
 }
+
+@media (max-width: 575.98px) {
+  .icon {
+    margin-left: 130px;
+    width: 20px;
+  }
+  .coway {
+    margin-left: 100px;
+    width: 70px;
+  }
+}
